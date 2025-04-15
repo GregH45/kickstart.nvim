@@ -10,7 +10,7 @@ local plugins = {
     config = function()
       require('lualine').setup {
         options = {
-          theme = 'molokai',
+          theme = "catppuccin",
           icons_enabled = true
         },
       }
@@ -47,6 +47,25 @@ local plugins = {
         bashls = {},
       },
     },
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000, -- make sure to load this before all other plugins
+    lazy = false,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "macchiato", -- or "latte", "frappe", "mocha"
+        transparent_background = false,
+        integrations = {
+          treesitter = true,
+          cmp = true,
+          neotree = true,
+          telescope = true,
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
+    end,
   },
 }
 return plugins

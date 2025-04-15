@@ -2,11 +2,12 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+
 local plugins = {
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    opts = {
+    options = {
       theme = 'onelight',
     },
   },
@@ -15,14 +16,31 @@ local plugins = {
     branch = 'v3.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'nvim-tree/nvim-web-devicons',
       'MunifTanjim/nui.nvim',
     },
-    lazy = false, -- neo-tree will lazily load itself
+    lazy = false,
     ---@module "neo-tree"
     ---@type neotree.Config?
     opts = {
       close_if_last_window = true,
+    },
+    config = function()
+      vim.keymap.set('n', '\\', ':Neotree toggle<CR>', { desc = 'Toggle Neo-tree', silent = true })
+    end,
+  },
+  {
+    'stevearc/conform.nvim',
+    opts = function()
+      return require 'custom.configs.conform'
+    end,
+  },
+  {
+    'neovim/nvim-lspconfig',
+    opts = {
+      servers = {
+        bashls = {},
+      },
     },
   },
 }

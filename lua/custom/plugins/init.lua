@@ -7,9 +7,14 @@ local plugins = {
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    options = {
-      theme = 'onelight',
-    },
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'molokai',
+          icons_enabled = true
+        },
+      }
+    end,
   },
   {
     'nvim-neo-tree/neo-tree.nvim',
